@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/yogesh-p-thakare3110/controller/book"
-	"github.com/yogesh-p-thakare3110/database/sql"
+	"github.com/yogesh-p-thakare3110/bookstore/controller/book"
+	"github.com/yogesh-p-thakare3110/bookstore/database/sql"
 )
 
 func RegisterBookStoreRoutes() *mux.Router {

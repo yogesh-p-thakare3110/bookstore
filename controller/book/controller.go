@@ -7,10 +7,10 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"github.com/yogesh-p-thakare3110/controller"
-	"github.com/yogesh-p-thakare3110/database"
-	"github.com/yogesh-p-thakare3110/model"
-	"github.com/yogesh-p-thakare3110/utils"
+	"github.com/yogesh-p-thakare3110/bookstore/controller"
+	"github.com/yogesh-p-thakare3110/bookstore/database"
+	"github.com/yogesh-p-thakare3110/bookstore/model"
+	"github.com/yogesh-p-thakare3110/bookstore/utils"
 )
 
 var NewBooks model.Book

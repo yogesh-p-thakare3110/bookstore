@@ -3,9 +3,9 @@ package sql
 import (
 	"database/sql"
 
-	"github.com/yogesh-p-thakare3110/config"
-	"github.com/yogesh-p-thakare3110/database"
-	"github.com/yogesh-p-thakare3110/model"
+	"github.com/yogesh-p-thakare3110/bookstore/config"
+	"github.com/yogesh-p-thakare3110/bookstore/database"
+	"github.com/yogesh-p-thakare3110/bookstore/model"
 )
 
 type Book struct {
