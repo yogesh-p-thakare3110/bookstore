@@ -8,27 +8,26 @@ import (
 	"github.com/yogesh-p-thakare3110/bookstore/model"
 )
 
-type Book struct {
-	Book *sql.DB
+type db struct {
+	db *sql.DB
 }
 
 func NewDB() database.IDB {
-	return &Book{
-		Book: config.Connect(),
+	return &db{
+		db: config.Connect(),
 	}
 }
 
-func (b *Book) GetAllBooks() ([]model.Book, error) {
+func (b *db) GetBook() ([]model.Book, error) {
 	var book model.Book
 	var arrBook []model.Book
-	rows, err := b.Book.Query("SELECT name, author, publication FROM book")
-
+	rows, err := b.db.Query("SELECT name, number, publication FROM book")
 	if err != nil {
 		return nil, err
 	}
 
 	for rows.Next() {
-		err = rows.Scan(&book.Name, &book.Author, &book.Publication)
+		err = rows.Scan(&book.Name, &book.Number, &book.Publication)
 		if err != nil {
 			return nil, err
 		}
@@ -37,24 +36,27 @@ func (b *Book) GetAllBooks() ([]model.Book, error) {
 	return arrBook, nil
 }
 
-func (b *Book) CreateBook(book model.Book) (int64 error) {
-	_, err := b.Book.Exec("INSERT INTO book (name, publication) VALUES(?, ?)", book.Name, book.Publication)
+func (b *db) InsertBook(book model.Book) (int64, error) {
+
+	res, err := b.db.Exec("INSERT INTO book(name, publication) VALUES(?, ?)", book.Name, book.Publication)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return err
+	number, err := res.LastInsertId()
+	return number, err
 }
 
-func (b *Book) GetBookById(Id int64) error {
-	_, err := b.Book.Exec("SELECT FROM book WHERE Id = ?, Id")
+func (b *db) UpdateBook(book model.Book) (int64, error) {
+	res, err := b.db.Exec("Update book SET name=?, publication=?, WHERE number=?", book.Number, book.Name, book.Publication)
 	if err != nil {
-		return err
+		return 0, err
 	}
-	return err
+	number, err := res.LastInsertId()
+	return number, err
 }
 
-func (b *Book) DeleteBook(Id int64) error {
-	_, err := b.Book.Exec("DELETE FROM book WHERE Id = ?, Id")
+func (b *db) DeleteBook(number int64) error {
+	_, err := b.db.Exec("DELETE FROM book WHERE number = ?", number)
 	if err != nil {
 		return err
 	}

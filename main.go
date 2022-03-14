@@ -10,5 +10,5 @@ import (
 
 func main() {
 	r := router.RegisterBookStoreRoutes()
-	log.Fatal(http.ListenAndServe("localhost:9010", r))
+	log.Fatal(http.ListenAndServe(":9010", r))
 }

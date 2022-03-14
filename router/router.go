@@ -12,11 +12,10 @@ func RegisterBookStoreRoutes() *mux.Router {
 	b := book.NewBook(db)
 
 	router := mux.NewRouter()
-	router.HandleFunc("/book/", b.CreateBook).Methods("POST")
-	router.HandleFunc("/book/", b.GetBook).Methods("GET")
-	router.HandleFunc("/book/{bookId}", b.GetBookById).Methods("GET")
-	router.HandleFunc("/book/{bookId}", b.UpdateBook).Methods("PUT")
-	router.HandleFunc("/book/{bookId}", b.DeleteBook).Methods("DELETE")
+	router.HandleFunc("/getBook/", b.AllBook()).Methods("GET")
+	router.HandleFunc("/insertBook/", b.InsertBook()).Methods("POST")
+	router.HandleFunc("/updateBook/", b.UpdateBook()).Methods("PUT")
+	router.HandleFunc("/deleteBook/", b.DeleteBook()).Methods("DELETE")
 
 	return router
 }
